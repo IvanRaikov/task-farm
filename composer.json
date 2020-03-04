@@ -1,0 +1,14 @@
+{
+    "name": "ivan/farm",
+    "authors": [
+        {
+            "name": "ivan raikov",
+            "email": "zemlyanin42@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+    	"psr-4": {
+    		"app\\": "classes/"}
+    }
+}

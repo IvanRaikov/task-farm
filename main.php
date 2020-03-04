@@ -1,14 +1,8 @@
 <?php
-spl_autoload_register(function($className){
-        $path = __DIR__.'/Classes/'.$className.'.php';        
-        if(is_readable($path)){
-            require $path;        
-        }    
-    });
+require_once __DIR__.'/vendor/autoload.php';
 
-$caws = 10;
-$chikens = 20;
+$animals = array('cow'=>10, 'chiken'=>20);
 
-$farm = new Farm($caws, $chikens);
+$farm = new app\Farm($animals);
 $farm->collectProducts();
 $farm->getProducts();
