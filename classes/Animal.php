@@ -3,8 +3,9 @@ namespace app;
 
 abstract class Animal{
 
-	function __construct(int $id, string $name){
-		$this->id = $id;
+	public $name;
+
+	public function __construct(string $name){
 		$this->name = $name;
 	}
 

@@ -2,28 +2,23 @@
 namespace app;
 
 use app\NameGenerator;
-use app\Cow;
-use app\Chiken;
 
 Class Farm {
 	
 	private $animals;
 	private $products;
 
-	function __construct($animals){
+	public function __construct($animals){
 		foreach($animals as $animal => $qty){
 			$this->addAnimals($animal, $qty);
 		}
-		
 	}
 
-	public function addAnimals($animal, $qty){
+	public function addAnimals($namespace, $qty){
 		$nameGenerator = new NameGenerator();
 		for($i = 0; $i < $qty; $i++){
-			$id = $this->getLastAnimalId($animal);
-			$animalName = $nameGenerator->getName();
-			$animalClass = "app\\".ucfirst($animal);
-			$this->animals[$animal][$id] = new $animalClass($id, $animalName);
+			$animalName = $this::getClassName($namespace);
+			$this->animals[$animalName][] = new $namespace($nameGenerator->getName());
 		}
 
 	}
@@ -47,11 +42,8 @@ Class Farm {
 		}
 	}
 
-	private function getLastAnimalId($animal){
-		if(!isset($this->animals[$animal]) || empty($this->animals[$animal])){
-			return 1;
-		}
-		return count($this->animals[$animal])+1;
-	
+	private function getClassName($namespace){
+    	$array = explode('\\',$namespace);
+    	return $array[count($array)-1];
 	}
 }
